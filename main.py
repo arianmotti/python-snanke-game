@@ -36,7 +36,7 @@ class SnakeGame:
     def place_food(self):
         x = random.randint(0, (self.w - BLOCK_SIZE) // BLOCK_SIZE) * BLOCK_SIZE
         y = random.randint(0, (self.h - BLOCK_SIZE) // BLOCK_SIZE) * BLOCK_SIZE
-        self.food == Point(x, y)
+        var = self.food == Point(x, y)
         if self.food in self.snake:
             self.place_food()
 
@@ -60,10 +60,10 @@ class SnakeGame:
         gameover = False
         if self.is_collision():
             gameover = True
-            return gameover,self.score
+            return gameover, self.score
 
         if self.head == self.food:
-            self.score +=1
+            self.score += 1
             self.place_food()
         else:
             self.snake.pop()
@@ -100,18 +100,17 @@ class SnakeGame:
         pygame.display.flip()
 
     def is_collision(self):
-        if self.head.x > self.w - BLOCK_SIZE or self.head.x<0 or self.head.y > self.h - BLOCK_SIZE or self.head.y < 0 :
+        if self.head.x > self.w - BLOCK_SIZE or self.head.x < 0 or self.head.y > self.h - BLOCK_SIZE or self.head.y < 0:
             return True
         if self.head in self.snake[1:]:
             return True
         return False
 
 
-
 if __name__ == '__main__':
     game = SnakeGame()
     while True:
-        gameover, score = game.play_step()
-        if gameover == True:
+        isgameover, score = game.play_step()
+        if isgameover == True:
             break
         print('final score is : ', score)
